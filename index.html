@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Form</title>
+  </head>
+  <body>
+    <form action="/signup" method="post" id="form-1">
+      <div class="container">
+        <h1>Sign Up</h1>
+        <div class="form-group">
+          <label for="full-name">Name</label>
+          <input
+            type="text"
+            id="full-name"
+            name="full-name"
+            placeholder="Johnny Depp"
+            required
+          />
+          <span class="form-message"> </span>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="text"
+            id="email"
+            name="email"
+            placeholder="nguyenhoaiy7@gmail.com"
+            required
+          />
+          <span class="form-message"> </span>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required />
+          <span class="form-message"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="re-password">Re-Password</label>
+          <input type="password" id="re-password" name="re-password" required />
+          <span class="form-message"></span>
+        </div>
+
+        <button>Sign Up</button>
+      </div>
+    </form>
+    <script src="./app.js"></script>
+    <script>
+      Validator({
+        form: `#form-1`,
+        rules: [
+          isRequired("#full-name"),
+          isEmail("#email"),
+          isPassword("#password"),
+          isRePassword("#re-password", function () {
+            return document.querySelector("#form-1 #password").value;
+          }),
+        ],
+      });
+    </script>
+  </body>
+</html>

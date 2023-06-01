@@ -1,0 +1,43 @@
+* {
+  margin: 0;
+}
+.container {
+  width: 300px;
+  height: 600px;
+  background-color: rgb(210, 210, 210);
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  margin-top: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin: 0 15px;
+  margin-top: 15px;
+}
+
+.form-group input {
+  margin: 5px 0;
+  padding: 7px;
+}
+
+.invalid span {
+  /* border: 1px solid #b44545; */
+  color: red;
+}
+
+.invalid input {
+  border-color: red;
+}
+
+button {
+  padding: 7px;
+  margin: 0 15px;
+  margin-top: 40px;
+}
