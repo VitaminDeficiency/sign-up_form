@@ -4,9 +4,12 @@
 .container {
   width: 300px;
   height: 600px;
-  background-color: rgb(210, 210, 210);
+  background-color: #fff;
+  border: 1px solid #1c1e21;
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
+  padding: 20px;
   margin: auto;
   margin-top: 20px;
 }
@@ -18,17 +21,17 @@ h1 {
 .form-group {
   display: flex;
   flex-direction: column;
-  margin: 0 15px;
-  margin-top: 15px;
+  margin-top: 20px;
 }
 
 .form-group input {
-  margin: 5px 0;
-  padding: 7px;
+  border: 1px solid #1c1e21;
+  border-radius: 5px;
+  background-color: #f5f6f7;
+  padding: 10px;
 }
 
 .invalid span {
-  /* border: 1px solid #b44545; */
   color: red;
 }
 
@@ -37,7 +40,10 @@ h1 {
 }
 
 button {
-  padding: 7px;
-  margin: 0 15px;
-  margin-top: 40px;
+  border: 0px solid;
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #36a420;
 }

@@ -6,6 +6,40 @@ function Validator(option) {
   var formElement = document.querySelector(option.form);
 
   if (formElement) {
+    formElement.onsubmit = function (e) {
+      e.preventDefault();
+
+      isFormValid = true;
+
+      option.rules.forEach((element) => {
+        var inputElement = formElement.querySelector(element.selectorKey);
+        var spanError =
+          inputElement.parentElement.querySelector(".form-message");
+        var isValid = validate(inputElement, element, spanError);
+        if (!isValid) {
+          isFormValid = false;
+        }
+      });
+
+      if (isFormValid) {
+        if (typeof option.onSubmit === "function") {
+          // Chọn trường dữ liệu thông qua attribute name input
+          var pickElementInput = formElement.querySelectorAll("[name]");
+
+          //  Chuyển pickInput sang Array để sử dụng reduce
+          var formValue = Array.from(pickElementInput).reduce(function (
+            value,
+            input
+          ) {
+            value[input.name] = input.value;
+            return value;
+          },
+          {});
+          option.onSubmit(formValue);
+        }
+      }
+    };
+
     // Lặp qua bên trong của key rules
     option.rules.forEach((element) => {
       // console.log(element.selectorKey);
@@ -18,16 +52,7 @@ function Validator(option) {
       if (inputElement) {
         // Trường hợp người dùng blur ra khỏi ô input
         inputElement.onblur = function () {
-          // Khai báo biến errorMessage trong đây để cập nhật giá trị khi blur
-          var errorMessage = element.test(inputElement.value);
-          console.log(errorMessage);
-          if (errorMessage) {
-            spanError.innerHTML = errorMessage;
-            inputElement.parentElement.classList.add("invalid");
-          } else {
-            spanError.innerHTML = "";
-            inputElement.parentElement.classList.remove("invalid");
-          }
+          validate(inputElement, element, spanError);
         };
 
         // Trường hợp người dùng đang nhập trong ô input
@@ -38,6 +63,19 @@ function Validator(option) {
       }
     });
   }
+}
+
+function validate(inputElement, element, spanError) {
+  // Khai báo biến errorMessage trong đây để cập nhật giá trị khi blur
+  var errorMessage = element.test(inputElement.value);
+  if (errorMessage) {
+    spanError.innerHTML = errorMessage;
+    inputElement.parentElement.classList.add("invalid");
+  } else {
+    spanError.innerHTML = "";
+    inputElement.parentElement.classList.remove("invalid");
+  }
+  return !errorMessage;
 }
 
 // Định nghĩa quy tắc (luật) bên trong Rules
